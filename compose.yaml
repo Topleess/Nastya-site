@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    container_name: natya-site-web
+    restart: always
+    ports:
+      - "8081:80" # Твой сайт будет доступен по порту 8081 сервера
+    networks:
+      - main_network
+
+networks:
+  main_network:
+    external: true
