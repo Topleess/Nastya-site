@@ -91,18 +91,20 @@ export const TabsSection: React.FC = () => {
                         {t.tracks.project_desc}
                      </p>
 
-                     <Button variant="outline" className="w-fit">
-                        {t.tracks.project_btn} <ArrowRight className="ml-2 w-4 h-4" />
-                     </Button>
+                     <a href="https://t.me/EcoCartaMsk" target="_blank" rel="noopener noreferrer">
+                        <Button variant="outline" className="w-fit">
+                           {t.tracks.project_btn} <ArrowRight className="ml-2 w-4 h-4" />
+                        </Button>
+                     </a>
                   </div>
 
                   <div className="relative min-h-[300px] lg:min-h-full bg-[#1A1A1A] overflow-hidden">
                      <div className="absolute inset-0 z-10 bg-[linear-gradient(rgba(0,0,0,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.5)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20 pointer-events-none" />
 
                      <img
-                        src="https://picsum.photos/id/122/800/800"
-                        alt="ESG Projects"
-                        className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-luminosity group-hover:scale-105 group-hover:opacity-70 transition-all duration-700"
+                        src="/images/ecocareer-logo.jpg"
+                        alt="EcoCareer Lab"
+                        className="absolute inset-0 w-full h-full object-cover opacity-40 blur-[2px] mix-blend-luminosity group-hover:scale-105 group-hover:opacity-60 group-hover:blur-0 transition-all duration-700"
                      />
 
                      <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#111]/50 to-[#111]" />

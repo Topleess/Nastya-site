@@ -32,7 +32,7 @@ export const Hero: React.FC = () => {
               <span className="text-brand-mint font-medium text-sm tracking-wider uppercase">{t.hero.role}</span>
             </div>
 
-            <h1 className="text-4xl md:text-7xl lg:text-8xl font-display font-black leading-[0.9] text-white tracking-tighter mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-[clamp(2.5rem,3.8vw,5rem)] font-display font-black leading-[0.9] text-white tracking-tighter mb-6">
               {t.hero.name_first} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">{t.hero.name_second}</span>
             </h1>

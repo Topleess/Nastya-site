@@ -4,18 +4,17 @@ import { useLanguage } from '../../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../common/Button';
 
-// Mock data to map translation indices to rich content (Images/Descriptions)
-// Mock data for images only - descriptions come from translations
-const awardImages = [
-  "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1611329535800-473d09292d37?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1475721027767-4d06cdd3080e?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1475721027767-4d06cdd3080e?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop"
+// Award icon colors for visual variety in modal
+const awardColors = [
+  "text-green-400",
+  "text-brand-mint",
+  "text-brand-mint",
+  "text-brand-yellow",
+  "text-blue-400",
+  "text-blue-400",
+  "text-green-400",
+  "text-purple-400",
+  "text-red-400",
 ];
 
 export const Timeline: React.FC = () => {
@@ -46,7 +45,7 @@ export const Timeline: React.FC = () => {
                 <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300">Achievements</span>
               </div>
 
-              <h2 className="text-4xl md:text-6xl font-display font-bold text-white leading-[0.9] tracking-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white leading-[0.95] tracking-tight">
                 {t.awards.title}
               </h2>
               <p className="text-gray-400 text-lg leading-relaxed max-w-md">
@@ -102,14 +101,10 @@ export const Timeline: React.FC = () => {
               </button>
 
               <div className="grid md:grid-cols-2">
-                {/* Image Section */}
-                <div className="h-64 md:h-auto relative bg-[#1A1A1A]">
-                  <img
-                    src={awardImages[selectedAward % awardImages.length]}
-                    alt="Achievement"
-                    className="absolute inset-0 w-full h-full object-cover opacity-80"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111] to-transparent md:bg-gradient-to-r" />
+                {/* Icon Section */}
+                <div className="h-64 md:h-auto relative bg-[#1A1A1A] flex items-center justify-center">
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] opacity-30" />
+                  <Trophy className={`w-16 h-16 ${awardColors[selectedAward % awardColors.length]} relative z-10 opacity-60`} />
                 </div>
 
                 {/* Content Section */}

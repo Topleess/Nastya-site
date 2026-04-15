@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sL -o favicon.svg \"https://realfavicongenerator.net/files/afdebdcd-5c12-4a84-b5fd-65dd8846cdf9/favicon.svg\")",
+      "Bash(curl -sL -o favicon-96x96.png \"https://realfavicongenerator.net/files/afdebdcd-5c12-4a84-b5fd-65dd8846cdf9/favicon-96x96.png\")",
+      "Bash(curl -sL -o favicon.ico \"https://realfavicongenerator.net/files/afdebdcd-5c12-4a84-b5fd-65dd8846cdf9/favicon.ico\")",
+      "Bash(curl -sL -o apple-touch-icon.png \"https://realfavicongenerator.net/files/afdebdcd-5c12-4a84-b5fd-65dd8846cdf9/apple-touch-icon.png\")",
+      "Bash(curl -sL -o web-app-manifest-192x192.png \"https://realfavicongenerator.net/files/afdebdcd-5c12-4a84-b5fd-65dd8846cdf9/web-app-manifest-192x192.png\")",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -sL -o ecocareer-logo.jpg \"https://t.me/EcoCartaMsk\")",
+      "Bash(ls -la ecocareer-logo.*)"
+    ]
+  }
+}

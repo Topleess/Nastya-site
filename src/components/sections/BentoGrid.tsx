@@ -1,5 +1,5 @@
 import React from 'react';
-import { Medal, Globe, Atom, Building2, GraduationCap, Users, Trophy, LayoutTemplate } from 'lucide-react';
+import { Globe, Atom, Building2, GraduationCap, Users, Trophy, LayoutTemplate } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -19,8 +19,8 @@ export const BentoGrid: React.FC = () => {
 
           {/* --- ROW 1 --- */}
 
-          {/* Card 1: Expertise */}
-          <motion.div whileHover={{ y: -5 }} className={cardBase}>
+          {/* Card 1: Expertise (wide) */}
+          <motion.div whileHover={{ y: -5 }} className={`${cardBase} lg:col-span-2`}>
             <div>
               <p className="text-sm font-bold text-brand-yellow uppercase tracking-wider mb-2">{t.bento.card1_text}</p>
               <h3 className="text-xl font-display font-bold text-white leading-tight">{t.bento.card2_title}</h3>
@@ -92,19 +92,6 @@ export const BentoGrid: React.FC = () => {
             <Trophy className={`${iconBase} text-white`} />
           </motion.div>
 
-          {/* Card 8: Filler/Visual or Additional Info */}
-          <motion.div whileHover={{ y: -5 }} className="bg-[#1a1a1a] border border-white/5 rounded-[2rem] p-0 overflow-hidden relative group">
-            <img
-              src="https://picsum.photos/id/20/800/800"
-              alt="Working"
-              className="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-                <Medal className="w-8 h-8 text-white" />
-              </div>
-            </div>
-          </motion.div>
 
         </div>
       </div>
