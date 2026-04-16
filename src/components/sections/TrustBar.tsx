@@ -3,22 +3,21 @@ import { useLanguage } from '../../context/LanguageContext';
 import { motion } from 'framer-motion';
 
 const partners = [
-  "/images/partners/partner-1.jpg",
-  "/images/partners/partner-2.jpg",
-  "/images/partners/partner-3.jpg",
-  "/images/partners/partner-4.jpg",
-  "/images/partners/partner-5.jpg",
-  "/images/partners/partner-6.jpg",
-  "/images/partners/partner-7.jpg",
-  "/images/partners/partner-8.jpg",
-  "/images/partners/partner-9.jpg",
-  "/images/partners/partner-10.png",
-  "/images/partners/partner-11.jpg",
-  "/images/partners/partner-12.png",
-  "/images/partners/partner-13.jpg",
-  "/images/partners/partner-14.jpg",
-  "/images/partners/partner-15.png",
-  "/images/partners/partner-16.jpg",
+  "/images/partners/085e35da718151e5b8bad08a6b86edbc_d1468d568e.png",
+  "/images/partners/0b9a1c78129809.5c9ba9fda8575.png",
+  "/images/partners/2026-04-16_11-49-54.png",
+  "/images/partners/40934154.png",
+  "/images/partners/YWhweqR06gLT3Nnmlkb7Gln3etdiWYq_Ey1yBW_M493u37cmyGt0ij_h3pocb5O.jpg",
+  "/images/partners/Z6ssy_xSoI8XWmBE4L331A1SZ0MwffSqrhVeIBYdhTrV5Ew964tQT6DAjli73zv.png",
+  "/images/partners/__-.svg",
+  "/images/partners/cae6cc2fc56f4cf5579b1b72deeef1ed.png",
+  "/images/partners/chyornyj_s_krasnym_1_0a0876f5b1.png",
+  "/images/partners/logo-2.svg",
+  "/images/partners/logo.svg",
+  "/images/partners/logocr@2x.png",
+  "/images/partners/png_transparent_peoples_friendship_university_of_russia_bauman_moscow.png",
+  "/images/partners/ranepa-logo.svg",
+  "/images/partners/wsgs00Rd1KK0S1yv1rfvX44e7E_QA9wOvkCqX2b0JLsbJ_rOHJ3UJWV6Jot2buy.png",
 ];
 
 export const TrustBar: React.FC = () => {
@@ -52,7 +51,7 @@ export const TrustBar: React.FC = () => {
               <img
                 src={src}
                 alt={`Partner ${index}`}
-                className="w-full h-full object-contain brightness-0 invert opacity-50 group-hover:opacity-90 transition-all duration-500"
+                className="w-full h-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
               />
             </div>
           ))}
