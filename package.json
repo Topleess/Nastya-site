@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/syne": "^5.2.7",
     "@supabase/supabase-js": "^2.103.1",
     "@vercel/analytics": "^2.0.1",
     "framer-motion": "^12.34.0",

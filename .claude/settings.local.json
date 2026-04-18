@@ -14,7 +14,8 @@
       "Bash(ls -la ecocareer-logo.*)",
       "Bash(npm i:*)",
       "Bash(rm -rf \"C:/Users/alex2/Desktop/Projecta/Nastya-site/public/images/partners/\"*)",
-      "Bash(cp \"C:/Users/alex2/Desktop/лого партнеров натси/\"* \"C:/Users/alex2/Desktop/Projecta/Nastya-site/public/images/partners/\")"
+      "Bash(cp \"C:/Users/alex2/Desktop/лого партнеров натси/\"* \"C:/Users/alex2/Desktop/Projecta/Nastya-site/public/images/partners/\")",
+      "Bash(du -sh \"C:/Users/alex2/Desktop/Projecta/Nastya-site/public/images\"/*.*)"
     ]
   }
 }

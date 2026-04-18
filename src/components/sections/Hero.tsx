@@ -74,6 +74,9 @@ export const Hero: React.FC = () => {
             <img
               src="/images/hero-main.png"
               alt="Anastasia Mashina"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
               className="relative z-10 w-auto h-[450px] md:h-[600px] object-contain"
             />
 

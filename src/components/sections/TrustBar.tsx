@@ -51,6 +51,8 @@ export const TrustBar: React.FC = () => {
               <img
                 src={src}
                 alt={`Partner ${index}`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
               />
             </div>

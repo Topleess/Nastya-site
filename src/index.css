@@ -1,3 +1,10 @@
+/* Self-hosted fonts (no Google Fonts dependency) */
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/syne/700.css";
+@import "@fontsource/syne/800.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

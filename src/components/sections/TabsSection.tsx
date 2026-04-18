@@ -104,6 +104,8 @@ export const TabsSection: React.FC = () => {
                      <img
                         src="/images/ecocareer-logo.jpg"
                         alt="EcoCareer Lab"
+                        loading="lazy"
+                        decoding="async"
                         className="absolute inset-0 w-full h-full object-cover opacity-40 blur-[2px] mix-blend-luminosity group-hover:scale-105 group-hover:opacity-60 group-hover:blur-0 transition-all duration-700"
                      />
 
