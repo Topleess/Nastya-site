@@ -38,8 +38,8 @@ jobs:
             git config --global --add safe.directory "$DEPLOY_DIR"
             cd "$DEPLOY_DIR"
             git pull --ff-only origin main
-            docker compose up -d --build
+            npm ci
+            npm run build
 
-            if [ -d /var/www/mashina-official.ru ]; then
-              docker cp natya-site-web:/usr/share/nginx/html/. /var/www/mashina-official.ru/
-            fi
+            mkdir -p /var/www/mashina-official.ru
+            cp -a dist/. /var/www/mashina-official.ru/
