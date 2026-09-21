@@ -12,6 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: External HTTPS check
+        run: |
+          curl -4 -sS -o /dev/null --connect-timeout 20 --max-time 30 \
+            -w 'external_https status=%{http_code} dns=%{time_namelookup}s connect=%{time_connect}s tls=%{time_appconnect}s ttfb=%{time_starttransfer}s total=%{time_total}s\n' \
+            https://mashina-official.ru/
+
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
