@@ -35,6 +35,7 @@ jobs:
               git clone https://github.com/${{ github.repository }}.git "$DEPLOY_DIR"
             fi
 
+            git config --global --add safe.directory "$DEPLOY_DIR"
             cd "$DEPLOY_DIR"
             git pull --ff-only origin main
             docker compose up -d --build
