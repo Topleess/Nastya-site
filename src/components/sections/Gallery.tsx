@@ -2,13 +2,13 @@ import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
 const photos = [
-  { id: 1, src: "/images/gallery-1.png", alt: "Event", type: "pro" },
-  { id: 2, src: "/images/gallery-2.png", alt: "Speaking", type: "pro" },
-  { id: 3, src: "/images/gallery-3.png", alt: "Conference", type: "pro" },
-  { id: 4, src: "/images/gallery-4.png", alt: "Meeting", type: "pro" },
-  { id: 5, src: "/images/gallery-5.jpg", alt: "Community", type: "casual" },
-  { id: 6, src: "/images/gallery-6.jpg", alt: "Work", type: "pro" },
-  { id: 7, src: "/images/gallery-7.jpg", alt: "Field Work", type: "casual" },
+  { id: 1, src: "/images/gallery-1.webp", alt: "Event", type: "pro" },
+  { id: 2, src: "/images/gallery-2.webp", alt: "Speaking", type: "pro" },
+  { id: 3, src: "/images/gallery-3.webp", alt: "Conference", type: "pro" },
+  { id: 4, src: "/images/gallery-4.webp", alt: "Meeting", type: "pro" },
+  { id: 5, src: "/images/gallery-5.webp", alt: "Community", type: "casual" },
+  { id: 6, src: "/images/gallery-6.webp", alt: "Work", type: "pro" },
+  { id: 7, src: "/images/gallery-7.webp", alt: "Field Work", type: "casual" },
 ];
 
 export const Gallery: React.FC = () => {

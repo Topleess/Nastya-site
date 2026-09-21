@@ -3,7 +3,6 @@ import { Send, Instagram, Linkedin, Loader2, CheckCircle2 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { useLanguage } from '../../context/LanguageContext';
 import { sendTelegramNotification } from '../../lib/telegram';
-import { saveSubmission } from '../../lib/supabase';
 
 export const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -25,7 +24,7 @@ export const Footer: React.FC = () => {
     try {
       const [telegramOk] = await Promise.allSettled([
         sendTelegramNotification(formData),
-        saveSubmission(formData),
+        import('../../lib/supabase').then(({ saveSubmission }) => saveSubmission(formData)),
       ]).then(results => results.map(r => r.status === 'fulfilled' && r.value));
 
       if (telegramOk) {

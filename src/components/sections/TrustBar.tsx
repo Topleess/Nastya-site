@@ -3,21 +3,21 @@ import { useLanguage } from '../../context/LanguageContext';
 import { motion } from 'framer-motion';
 
 const partners = [
-  "/images/partners/085e35da718151e5b8bad08a6b86edbc_d1468d568e.png",
-  "/images/partners/0b9a1c78129809.5c9ba9fda8575.png",
-  "/images/partners/2026-04-16_11-49-54.png",
-  "/images/partners/40934154.png",
-  "/images/partners/YWhweqR06gLT3Nnmlkb7Gln3etdiWYq_Ey1yBW_M493u37cmyGt0ij_h3pocb5O.jpg",
-  "/images/partners/Z6ssy_xSoI8XWmBE4L331A1SZ0MwffSqrhVeIBYdhTrV5Ew964tQT6DAjli73zv.png",
-  "/images/partners/__-.svg",
-  "/images/partners/cae6cc2fc56f4cf5579b1b72deeef1ed.png",
-  "/images/partners/chyornyj_s_krasnym_1_0a0876f5b1.png",
-  "/images/partners/logo-2.svg",
-  "/images/partners/logo.svg",
-  "/images/partners/logocr@2x.png",
-  "/images/partners/png_transparent_peoples_friendship_university_of_russia_bauman_moscow.png",
-  "/images/partners/ranepa-logo.svg",
-  "/images/partners/wsgs00Rd1KK0S1yv1rfvX44e7E_QA9wOvkCqX2b0JLsbJ_rOHJ3UJWV6Jot2buy.png",
+  "/images/partners/085e35da718151e5b8bad08a6b86edbc_d1468d568e.webp",
+  "/images/partners/0b9a1c78129809.5c9ba9fda8575.webp",
+  "/images/partners/2026-04-16_11-49-54.webp",
+  "/images/partners/40934154.webp",
+  "/images/partners/YWhweqR06gLT3Nnmlkb7Gln3etdiWYq_Ey1yBW_M493u37cmyGt0ij_h3pocb5O.webp",
+  "/images/partners/Z6ssy_xSoI8XWmBE4L331A1SZ0MwffSqrhVeIBYdhTrV5Ew964tQT6DAjli73zv.webp",
+  "/images/partners/__-.webp",
+  "/images/partners/cae6cc2fc56f4cf5579b1b72deeef1ed.webp",
+  "/images/partners/chyornyj_s_krasnym_1_0a0876f5b1.webp",
+  "/images/partners/logo-2.webp",
+  "/images/partners/logo.webp",
+  "/images/partners/logocr@2x.webp",
+  "/images/partners/png_transparent_peoples_friendship_university_of_russia_bauman_moscow.webp",
+  "/images/partners/ranepa-logo.webp",
+  "/images/partners/wsgs00Rd1KK0S1yv1rfvX44e7E_QA9wOvkCqX2b0JLsbJ_rOHJ3UJWV6Jot2buy.webp",
 ];
 
 export const TrustBar: React.FC = () => {

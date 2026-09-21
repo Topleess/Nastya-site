@@ -72,7 +72,7 @@ export const Hero: React.FC = () => {
 
             {/* 3. The Cutout Image */}
             <img
-              src="/images/hero-main.png"
+              src="/images/hero-main.webp"
               alt="Anastasia Mashina"
               loading="eager"
               decoding="async"
