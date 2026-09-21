@@ -43,3 +43,14 @@ jobs:
 
             mkdir -p /var/www/mashina-official.ru
             cp -a dist/. /var/www/mashina-official.ru/
+
+            nginx -t
+            systemctl is-active nginx
+            uptime
+            free -m
+            df -h /
+            curl -sk --resolve mashina-official.ru:443:127.0.0.1 \
+              -o /dev/null \
+              -w 'local_https status=%{http_code} connect=%{time_connect}s tls=%{time_appconnect}s ttfb=%{time_starttransfer}s total=%{time_total}s\n' \
+              https://mashina-official.ru/
+            tail -n 30 /var/log/nginx/error.log || true
