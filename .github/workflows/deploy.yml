@@ -23,10 +23,22 @@ jobs:
           command_timeout: 15m
           script_stop: true
           script: |
-            cd /opt/stacks/natya-site
-            if [ ! -d ".git" ]; then
-              git clone https://github.com/${{ github.repository }}.git .
+            set -e
+
+            if [ -d /srv/mashina-site/.git ]; then
+              DEPLOY_DIR=/srv/mashina-site
+            elif [ -d /opt/stacks/natya-site/.git ]; then
+              DEPLOY_DIR=/opt/stacks/natya-site
             else
-              git pull --ff-only origin main
+              DEPLOY_DIR=/srv/mashina-site
+              mkdir -p "$DEPLOY_DIR"
+              git clone https://github.com/${{ github.repository }}.git "$DEPLOY_DIR"
             fi
+
+            cd "$DEPLOY_DIR"
+            git pull --ff-only origin main
             docker compose up -d --build
+
+            if [ -d /var/www/mashina-official.ru ]; then
+              docker cp natya-site-web:/usr/share/nginx/html/. /var/www/mashina-official.ru/
+            fi
