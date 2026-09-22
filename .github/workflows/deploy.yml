@@ -115,3 +115,11 @@ jobs:
               -w 'local_https status=%{http_code} connect=%{time_connect}s tls=%{time_appconnect}s ttfb=%{time_starttransfer}s total=%{time_total}s\n' \
               https://mashina-official.ru/
             systemctl --no-pager --full status nastya-contact | head -n 20
+
+      - name: Verify Telegram contact delivery
+        if: contains(github.event.head_commit.message, '[contact-test]')
+        run: |
+          curl -4 -sS --fail-with-body --connect-timeout 20 --max-time 30 \
+            -X POST https://mashina-official.ru/api/contact \
+            -H 'Content-Type: application/json' \
+            --data '{"name":"Проверка сайта","email":"test@mashina-official.ru","message":"Тестовая заявка после настройки Telegram-бота. Если вы видите это сообщение, форма работает."}'
