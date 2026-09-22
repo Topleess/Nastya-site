@@ -2,13 +2,15 @@ import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
 const photos = [
-  { id: 1, src: "/images/gallery-1.webp", alt: "Event", type: "pro" },
-  { id: 2, src: "/images/gallery-2.webp", alt: "Speaking", type: "pro" },
-  { id: 3, src: "/images/gallery-3.webp", alt: "Conference", type: "pro" },
-  { id: 4, src: "/images/gallery-4.webp", alt: "Meeting", type: "pro" },
-  { id: 5, src: "/images/gallery-5.webp", alt: "Community", type: "casual" },
-  { id: 6, src: "/images/gallery-6.webp", alt: "Work", type: "pro" },
-  { id: 7, src: "/images/gallery-7.webp", alt: "Field Work", type: "casual" },
+  { id: 1, src: "/images/gallery/photo-1361.webp", alt: "Speaking at a conference", type: "speaker" },
+  { id: 2, src: "/images/gallery/photo-1362.webp", alt: "Professional meeting", type: "pro" },
+  { id: 3, src: "/images/gallery/photo-1363.webp", alt: "Community event", type: "community" },
+  { id: 4, src: "/images/gallery/photo-1364.webp", alt: "International reception", type: "pro" },
+  { id: 5, src: "/images/gallery/photo-1365.webp", alt: "Industry exhibition", type: "casual" },
+  { id: 6, src: "/images/gallery/photo-1366.webp", alt: "Professional networking", type: "networking" },
+  { id: 7, src: "/images/gallery/photo-1367.webp", alt: "Public talk", type: "speaker" },
+  { id: 8, src: "/images/gallery/photo-1368.webp", alt: "Startup presentation", type: "project" },
+  { id: 9, src: "/images/gallery/photo-1369.webp", alt: "BreakPoint forum", type: "event" },
 ];
 
 export const Gallery: React.FC = () => {
@@ -30,7 +32,7 @@ export const Gallery: React.FC = () => {
                 alt={photo.alt}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-auto object-cover transition-all duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0"
+                className="w-full h-auto object-cover transition-all duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100 grayscale group-hover:grayscale-0"
               />
 
               {/* Tech Overlay corners */}
