@@ -102,6 +102,13 @@ jobs:
             systemctl restart nastya-contact
             systemctl reload nginx
 
+            sleep 2
+            if ! systemctl is-active --quiet nastya-contact; then
+              systemctl --no-pager --full status nastya-contact || true
+              journalctl -u nastya-contact -n 50 --no-pager || true
+              exit 1
+            fi
+
             curl -fsS http://127.0.0.1:3100/health
             curl -sk --resolve mashina-official.ru:443:127.0.0.1 \
               -o /dev/null \
