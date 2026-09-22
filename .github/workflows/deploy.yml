@@ -50,13 +50,61 @@ jobs:
             mkdir -p /var/www/mashina-official.ru
             cp -a dist/. /var/www/mashina-official.ru/
 
+            test -f /etc/nastya-contact.env
+            chmod 600 /etc/nastya-contact.env
+
+            NODE_BIN="$(command -v node)"
+            cat >/etc/systemd/system/nastya-contact.service <<EOF
+            [Unit]
+            Description=Nastya site Telegram contact form
+            After=network-online.target
+            Wants=network-online.target
+
+            [Service]
+            Type=simple
+            EnvironmentFile=/etc/nastya-contact.env
+            WorkingDirectory=$DEPLOY_DIR
+            ExecStart=$NODE_BIN $DEPLOY_DIR/server/contact-service.mjs
+            Restart=on-failure
+            RestartSec=3
+            User=www-data
+            Group=www-data
+            NoNewPrivileges=true
+            PrivateTmp=true
+
+            [Install]
+            WantedBy=multi-user.target
+            EOF
+
+            mkdir -p /etc/nginx/snippets
+            cat >/etc/nginx/snippets/nastya-contact-api.conf <<'EOF'
+            location = /api/contact {
+                proxy_pass http://127.0.0.1:3100;
+                proxy_http_version 1.1;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_connect_timeout 5s;
+                proxy_read_timeout 15s;
+                client_max_body_size 32k;
+            }
+            EOF
+
+            NGINX_SITE="$(grep -RIl 'server_name[^;]*mashina-official\.ru' /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null | head -n1)"
+            test -n "$NGINX_SITE"
+            if ! grep -q 'nastya-contact-api.conf' "$NGINX_SITE"; then
+              sed -i '/server_name[^;]*mashina-official\.ru/a\    include /etc/nginx/snippets/nastya-contact-api.conf;' "$NGINX_SITE"
+            fi
+
             nginx -t
-            systemctl is-active nginx
-            uptime
-            free -m
-            df -h /
+            systemctl daemon-reload
+            systemctl enable --now nastya-contact
+            systemctl restart nastya-contact
+            systemctl reload nginx
+
+            curl -fsS http://127.0.0.1:3100/health
             curl -sk --resolve mashina-official.ru:443:127.0.0.1 \
               -o /dev/null \
               -w 'local_https status=%{http_code} connect=%{time_connect}s tls=%{time_appconnect}s ttfb=%{time_starttransfer}s total=%{time_total}s\n' \
               https://mashina-official.ru/
-            tail -n 30 /var/log/nginx/error.log || true
+            systemctl --no-pager --full status nastya-contact | head -n 20

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, Instagram, Linkedin, Loader2, CheckCircle2 } from 'lucide-react';
+import { Send, Linkedin, Loader2, CheckCircle2 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { useLanguage } from '../../context/LanguageContext';
 import { sendTelegramNotification } from '../../lib/telegram';
@@ -21,21 +21,13 @@ export const Footer: React.FC = () => {
     if (!formData.name || !formData.email || !formData.message) return;
 
     setStatus('sending');
-    try {
-      const [telegramOk] = await Promise.allSettled([
-        sendTelegramNotification(formData),
-        import('../../lib/supabase').then(({ saveSubmission }) => saveSubmission(formData)),
-      ]).then(results => results.map(r => r.status === 'fulfilled' && r.value));
+    const telegramOk = await sendTelegramNotification(formData);
 
-      if (telegramOk) {
-        setStatus('sent');
-        setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setStatus('idle'), 4000);
-      } else {
-        setStatus('error');
-        setTimeout(() => setStatus('idle'), 3000);
-      }
-    } catch {
+    if (telegramOk) {
+      setStatus('sent');
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setStatus('idle'), 4000);
+    } else {
       setStatus('error');
       setTimeout(() => setStatus('idle'), 3000);
     }
@@ -43,15 +35,10 @@ export const Footer: React.FC = () => {
 
   return (
     <footer id="footer" className="pt-20 pb-10 bg-[#111] border-t border-white/5 relative overflow-hidden">
-      {/* Grid background for footer */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20 pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
-
-        {/* Main Content: CTA Left, Form Right */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 mb-16 items-start">
-
-          {/* 1. CTA Area & Socials */}
           <div className="order-1">
             <h2 className="text-5xl md:text-6xl font-display font-bold leading-none mb-8 text-white">
               {t.footer.title_1} <br /> <span className="text-brand-mint text-shadow-glow">{t.footer.title_2}</span>
@@ -70,7 +57,6 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* 2. Contact Form (Now distinct and prioritized) */}
           <div className="order-2 w-full">
             <div className="bg-[#151515]/80 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-2xl h-full">
               <h3 className="text-2xl font-bold mb-6 text-white">{t.footer.form_title}</h3>
@@ -121,11 +107,8 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* 3. Navigation & Copyright Area (Bottom) */}
         <div className="border-t border-white/5 pt-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-
-            {/* Horizontal Navigation */}
             <ul className="flex flex-wrap justify-center gap-6 text-gray-400 font-medium text-sm order-2 md:order-1">
               <li><button onClick={() => scrollToSection('home')} className="hover:text-brand-mint transition-colors">{t.nav.home}</button></li>
               <li><button onClick={() => scrollToSection('about')} className="hover:text-brand-mint transition-colors">{t.nav.about}</button></li>
@@ -134,7 +117,6 @@ export const Footer: React.FC = () => {
               <li><button onClick={() => scrollToSection('footer')} className="hover:text-brand-mint transition-colors">{t.nav.contact}</button></li>
             </ul>
 
-            {/* Legal Links */}
             <div className="flex gap-6 text-sm text-gray-600 order-3 md:order-2">
               <button className="hover:text-white transition-colors">{t.footer.privacy}</button>
               <button className="hover:text-white transition-colors">{t.footer.terms}</button>
