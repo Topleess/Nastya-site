@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Award, Calendar, CheckCircle2, ExternalLink, Sparkles, X } from 'lucide-react';
+import { Calendar, CheckCircle2, Sparkles, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { achievements, Achievement, AchievementCategory } from '../../data/achievements';
@@ -18,10 +18,13 @@ export const Timeline: React.FC = () => {
   const [selected, setSelected] = useState<Achievement | null>(null);
   const labels = categoryLabels[language];
 
-  const visibleAchievements = useMemo(
-    () => filter === 'all' ? achievements : achievements.filter((achievement) => achievement.category === filter),
-    [filter],
-  );
+  const visibleAchievements = useMemo(() => {
+    const filtered = filter === 'all'
+      ? achievements
+      : achievements.filter((achievement) => achievement.category === filter);
+
+    return [...filtered].sort((a, b) => Number(b.year) - Number(a.year));
+  }, [filter]);
 
   useEffect(() => {
     if (!selected) return;
@@ -126,18 +129,10 @@ export const Timeline: React.FC = () => {
 
               <div className={`overflow-y-auto p-4 md:p-6 bg-[#181818] grid gap-4 ${selected.files.length > 1 ? 'md:grid-cols-2' : ''}`}>
                 {selected.files.map((file, index) => (
-                  <a key={file} href={file} target="_blank" rel="noopener noreferrer" className="group/file block relative bg-white rounded-xl overflow-hidden">
+                  <a key={file} href={file} target="_blank" rel="noopener noreferrer" className="block relative bg-white rounded-xl overflow-hidden">
                     <img src={file} alt={`${selected.title}${selected.files.length > 1 ? ` — ${index + 1}` : ''}`} loading="lazy" decoding="async" className="w-full max-h-[68vh] object-contain" />
-                    <span className="absolute right-3 bottom-3 inline-flex items-center gap-2 px-3 py-2 rounded-full bg-black/75 text-white text-xs opacity-0 group-hover/file:opacity-100 transition-opacity">
-                      <ExternalLink className="w-3.5 h-3.5" /> Open original
-                    </span>
                   </a>
                 ))}
-              </div>
-
-              <div className="p-4 md:px-6 border-t border-white/10 flex items-center gap-2 text-xs text-gray-400">
-                <Award className="w-4 h-4 text-brand-mint" />
-                {language === 'ru' ? 'Нажмите на документ, чтобы открыть оригинал' : language === 'es' ? 'Haz clic en el documento para abrir el original' : 'Click the document to open the original'}
               </div>
             </motion.div>
           </motion.div>

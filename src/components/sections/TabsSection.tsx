@@ -98,7 +98,7 @@ export const TabsSection: React.FC = () => {
                      </a>
                   </div>
 
-                  <div className="relative min-h-[300px] lg:min-h-full bg-[#1A1A1A] overflow-hidden">
+                  <div className="relative min-h-[300px] lg:min-h-full bg-[#1A1A1A] overflow-hidden rounded-b-[2.35rem] lg:rounded-bl-none lg:rounded-r-[2.35rem] isolate">
                      <div className="absolute inset-0 z-10 bg-[linear-gradient(rgba(0,0,0,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.5)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20 pointer-events-none" />
 
                      <img
@@ -106,7 +106,7 @@ export const TabsSection: React.FC = () => {
                         alt="EcoCareer Lab"
                         loading="lazy"
                         decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover opacity-40 blur-[2px] mix-blend-luminosity group-hover:scale-105 group-hover:opacity-60 group-hover:blur-0 transition-all duration-700"
+                        className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity group-hover:scale-105 group-hover:opacity-60 transition-all duration-700"
                      />
 
                      <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#111]/50 to-[#111]" />
