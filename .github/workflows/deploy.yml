@@ -54,41 +54,41 @@ jobs:
             chmod 600 /etc/nastya-contact.env
 
             NODE_BIN="$(command -v node)"
-            cat >/etc/systemd/system/nastya-contact.service <<EOF
-            [Unit]
-            Description=Nastya site Telegram contact form
-            After=network-online.target
-            Wants=network-online.target
-
-            [Service]
-            Type=simple
-            EnvironmentFile=/etc/nastya-contact.env
-            WorkingDirectory=$DEPLOY_DIR
-            ExecStart=$NODE_BIN $DEPLOY_DIR/server/contact-service.mjs
-            Restart=on-failure
-            RestartSec=3
-            User=www-data
-            Group=www-data
-            NoNewPrivileges=true
-            PrivateTmp=true
-
-            [Install]
-            WantedBy=multi-user.target
-            EOF
+            printf '%s\n' \
+              '[Unit]' \
+              'Description=Nastya site Telegram contact form' \
+              'After=network-online.target' \
+              'Wants=network-online.target' \
+              '' \
+              '[Service]' \
+              'Type=simple' \
+              'EnvironmentFile=/etc/nastya-contact.env' \
+              "WorkingDirectory=$DEPLOY_DIR" \
+              "ExecStart=$NODE_BIN $DEPLOY_DIR/server/contact-service.mjs" \
+              'Restart=on-failure' \
+              'RestartSec=3' \
+              'User=www-data' \
+              'Group=www-data' \
+              'NoNewPrivileges=true' \
+              'PrivateTmp=true' \
+              '' \
+              '[Install]' \
+              'WantedBy=multi-user.target' \
+              > /etc/systemd/system/nastya-contact.service
 
             mkdir -p /etc/nginx/snippets
-            cat >/etc/nginx/snippets/nastya-contact-api.conf <<'EOF'
-            location = /api/contact {
-                proxy_pass http://127.0.0.1:3100;
-                proxy_http_version 1.1;
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_connect_timeout 5s;
-                proxy_read_timeout 15s;
-                client_max_body_size 32k;
-            }
-            EOF
+            printf '%s\n' \
+              'location = /api/contact {' \
+              '    proxy_pass http://127.0.0.1:3100;' \
+              '    proxy_http_version 1.1;' \
+              '    proxy_set_header Host $host;' \
+              '    proxy_set_header X-Real-IP $remote_addr;' \
+              '    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;' \
+              '    proxy_connect_timeout 5s;' \
+              '    proxy_read_timeout 15s;' \
+              '    client_max_body_size 32k;' \
+              '}' \
+              > /etc/nginx/snippets/nastya-contact-api.conf
 
             NGINX_SITE="$(grep -RIl 'server_name[^;]*mashina-official\.ru' /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null | head -n1)"
             test -n "$NGINX_SITE"
