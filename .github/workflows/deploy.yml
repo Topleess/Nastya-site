@@ -60,3 +60,14 @@ jobs:
               -w 'local_https status=%{http_code} connect=%{time_connect}s tls=%{time_appconnect}s ttfb=%{time_starttransfer}s total=%{time_total}s\n' \
               https://mashina-official.ru/
             tail -n 30 /var/log/nginx/error.log || true
+
+            echo "=== NETWORK ROUTES ==="
+            ip -4 route || true
+            echo "=== NFTABLES ==="
+            timeout 10 nft list ruleset || true
+            echo "=== IPTABLES ==="
+            iptables -S || true
+            echo "=== FAIL2BAN ==="
+            fail2ban-client status || true
+            echo "=== NGINX NETWORK DIRECTIVES ==="
+            nginx -T 2>&1 | grep -Ei 'listen|server_name|allow|deny|geo|map|ssl_protocols|ssl_ecdh_curve|limit_conn|limit_req' || true
