@@ -25,7 +25,7 @@ export const TabsSection: React.FC = () => {
             {/* 1. Tracks Grid - 4 Items */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                {/* Track 1: Ecosystem */}
-               <div className={cardStyle}>
+               <a href="https://движениеэкосистема.рф/" target="_blank" rel="noopener noreferrer" className={`${cardStyle} block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-brand-mint/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className={`${iconBoxStyle} text-brand-mint shadow-[0_0_15px_rgba(0,210,160,0.1)]`}>
                      <Users className="w-6 h-6" />
@@ -33,10 +33,10 @@ export const TabsSection: React.FC = () => {
                   <h3 className="text-xl font-display font-bold text-white mb-2 relative z-10">{t.tracks.track_1}</h3>
                   <p className="text-sm text-gray-400 leading-relaxed relative z-10">{t.tracks.track_1_desc}</p>
                   <ArrowUpRight className="absolute top-8 right-8 text-gray-600 group-hover:text-white transition-colors" />
-               </div>
+               </a>
 
                {/* Track 2: Ya v dele */}
-               <div className={cardStyle}>
+               <a href="https://явделе.рф/" target="_blank" rel="noopener noreferrer" className={`${cardStyle} block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-brand-yellow/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className={`${iconBoxStyle} text-brand-yellow shadow-[0_0_15px_rgba(253,203,88,0.1)]`}>
                      <Mic2 className="w-6 h-6" />
@@ -44,10 +44,10 @@ export const TabsSection: React.FC = () => {
                   <h3 className="text-xl font-display font-bold text-white mb-2 relative z-10">{t.tracks.track_2}</h3>
                   <p className="text-sm text-gray-400 leading-relaxed relative z-10">{t.tracks.track_2_desc}</p>
                   <ArrowUpRight className="absolute top-8 right-8 text-gray-600 group-hover:text-white transition-colors" />
-               </div>
+               </a>
 
                {/* Track 3: EcoCareer Lab */}
-               <div className={cardStyle}>
+               <a href="https://t.me/EcoCartaMsk" target="_blank" rel="noopener noreferrer" className={`${cardStyle} block focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className={`${iconBoxStyle} text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.1)]`}>
                      <FlaskConical className="w-6 h-6" />
@@ -55,10 +55,10 @@ export const TabsSection: React.FC = () => {
                   <h3 className="text-xl font-display font-bold text-white mb-2 relative z-10">{t.tracks.track_3}</h3>
                   <p className="text-sm text-gray-400 leading-relaxed relative z-10">{t.tracks.track_3_desc}</p>
                   <ArrowUpRight className="absolute top-8 right-8 text-gray-600 group-hover:text-white transition-colors" />
-               </div>
+               </a>
 
                {/* Track 4: RUDN NSO */}
-               <div className={cardStyle}>
+               <a href="https://ie.rudn.ru/ru/science/nso/" target="_blank" rel="noopener noreferrer" className={`${cardStyle} block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className={`${iconBoxStyle} text-blue-400 shadow-[0_0_15px_rgba(96,165,250,0.1)]`}>
                      <Users className="w-6 h-6" />
@@ -66,7 +66,7 @@ export const TabsSection: React.FC = () => {
                   <h3 className="text-xl font-display font-bold text-white mb-2 relative z-10">{t.tracks.track_4}</h3>
                   <p className="text-sm text-gray-400 leading-relaxed relative z-10">{t.tracks.track_4_desc}</p>
                   <ArrowUpRight className="absolute top-8 right-8 text-gray-600 group-hover:text-white transition-colors" />
-               </div>
+               </a>
             </div>
 
             {/* 2. Key Directions (Featured) */}

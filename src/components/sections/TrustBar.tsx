@@ -105,13 +105,16 @@ export const TrustBar: React.FC = () => {
         </h2>
       </div>
 
-      <div className="relative space-y-3 sm:space-y-4">
+      <div
+        className="relative space-y-3 sm:space-y-4"
+        style={{
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 11%, black 89%, transparent 100%)',
+          maskImage: 'linear-gradient(to right, transparent 0%, black 11%, black 89%, transparent 100%)',
+        }}
+      >
         <LogoRow partners={partnerRows[0]} direction="left" duration={28} offsetClass="-ml-20" />
         <LogoRow partners={partnerRows[1]} direction="right" duration={32} offsetClass="-ml-8" />
         <LogoRow partners={partnerRows[2]} direction="left" duration={25} offsetClass="-ml-32" />
-
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#0d0f0f] to-transparent sm:w-24" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#0d0f0f] to-transparent sm:w-24" />
       </div>
     </section>
   );

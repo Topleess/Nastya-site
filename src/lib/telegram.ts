@@ -5,10 +5,10 @@ interface ContactForm {
 }
 
 export async function sendTelegramNotification(form: ContactForm): Promise<boolean> {
-  try {
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 15000);
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 15000);
 
+  try {
     const response = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -16,9 +16,10 @@ export async function sendTelegramNotification(form: ContactForm): Promise<boole
       signal: controller.signal,
     });
 
-    window.clearTimeout(timeout);
     return response.ok;
   } catch {
     return false;
+  } finally {
+    window.clearTimeout(timeout);
   }
 }

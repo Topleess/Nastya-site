@@ -5,8 +5,14 @@ import { useLanguage } from '../../context/LanguageContext';
 
 const competenceIcons = [Leaf, FileText, BarChart3, Sprout];
 
+const mobileTitleLines = {
+  en: ['Sustainable', 'development', '— from requirements', 'to strategy'],
+  ru: ['Устойчивое развитие', '— от требований', 'к стратегии'],
+  es: ['Desarrollo sostenible', '— de los requisitos', 'a la estrategia'],
+};
+
 export const BentoGrid: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section id="about" className="relative overflow-hidden bg-brand-black py-16 sm:py-20 lg:py-24">
@@ -24,8 +30,13 @@ export const BentoGrid: React.FC = () => {
           {t.nav.about}
         </p>
 
-        <h2 className="max-w-6xl font-display text-[clamp(2rem,5.1vw,4.5rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.045em] text-white">
-          {t.about.title}
+        <h2 className="max-w-6xl font-display font-extrabold uppercase leading-[0.96] tracking-[-0.045em] text-white sm:text-[clamp(2.4rem,5.1vw,4.5rem)]">
+          <span className={`sm:hidden ${language === 'ru' ? 'text-[2rem]' : 'text-[1.75rem]'}`}>
+            {mobileTitleLines[language].map((line) => (
+              <span key={line} className="block">{line}</span>
+            ))}
+          </span>
+          <span className="hidden sm:inline">{t.about.title}</span>
         </h2>
 
         <motion.div
@@ -54,17 +65,17 @@ export const BentoGrid: React.FC = () => {
               {t.about.competenciesTitle}
             </h3>
 
-            <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 lg:gap-4">
+            <div className="grid grid-cols-2 gap-3 lg:gap-4">
               {t.about.competencies.map((competence, index) => {
                 const Icon = competenceIcons[index];
 
                 return (
                   <div
                     key={competence}
-                    className="flex min-h-[4rem] items-center gap-3 rounded-full border border-brand-mint/55 bg-brand-mint/[0.035] px-5 py-3 text-sm font-semibold uppercase tracking-[0.02em] text-white transition-colors hover:bg-brand-mint/[0.08] sm:px-6"
+                    className="flex min-h-[4rem] min-w-0 items-center justify-center gap-2.5 overflow-hidden rounded-full border border-brand-mint/55 bg-brand-mint/[0.035] px-3 py-3 text-[clamp(0.62rem,2.65vw,0.78rem)] font-semibold uppercase tracking-[0.01em] text-white transition-colors hover:bg-brand-mint/[0.08] sm:justify-start sm:gap-3 sm:px-5 sm:text-sm lg:px-6"
                   >
-                    <Icon className="h-6 w-6 shrink-0 text-brand-mint" strokeWidth={1.8} />
-                    <span>{competence}</span>
+                    <Icon className="h-5 w-5 shrink-0 text-brand-mint sm:h-6 sm:w-6" strokeWidth={1.8} />
+                    <span className="min-w-0 leading-tight [overflow-wrap:anywhere]">{competence}</span>
                   </div>
                 );
               })}
