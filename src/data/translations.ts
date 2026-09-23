@@ -26,7 +26,7 @@ export const translations = {
       paragraph1: "Sustainability and carbon regulation specialist with a background in ecology at RUDN University and sustainable development economics at Moscow State University.",
       paragraph2: "For more than three years, I have managed environmental and ESG projects, including federal projects under the auspices of Rosatom State Corporation.",
       competenciesTitle: "Core expertise",
-      competencies: ["Carbon markets", "CBAM", "CSRD · TCFD · GRI", "Decarbonisation"],
+      competencies: ["Carbon markets", "CBAM", "CSRD", "TCFD", "GRI", "Decarbonisation"],
     },
     bento: {
       card1_text: "EXPERTISE",
@@ -136,7 +136,7 @@ export const translations = {
       paragraph1: "Специалист по устойчивому развитию и углеродному регулированию с образованием в области экологии — РУДН — и экономики устойчивого развития — МГУ.",
       paragraph2: "Более трёх лет управляю экологическими и ESG-проектами, включая работу над федеральными проектами под эгидой Госкорпорации «Росатом».",
       competenciesTitle: "Ключевые компетенции",
-      competencies: ["Углеродные рынки", "CBAM", "CSRD · TCFD · GRI", "Декарбонизация"],
+      competencies: ["Углеродные рынки", "CBAM", "CSRD", "TCFD", "GRI", "Декарбонизация"],
     },
     bento: {
       card1_text: "ЭКСПЕРТИЗА",
@@ -246,7 +246,7 @@ export const translations = {
       paragraph1: "Especialista en desarrollo sostenible y regulación del carbono, con formación en ecología en la Universidad RUDN y economía del desarrollo sostenible en la Universidad Estatal de Moscú.",
       paragraph2: "Durante más de tres años he dirigido proyectos ambientales y ESG, incluidos proyectos federales bajo los auspicios de la Corporación Estatal Rosatom.",
       competenciesTitle: "Competencias clave",
-      competencies: ["Mercados de carbono", "CBAM", "CSRD · TCFD · GRI", "Descarbonización"],
+      competencies: ["Mercados de carbono", "CBAM", "CSRD", "TCFD", "GRI", "Descarbonización"],
     },
     bento: {
       card1_text: "EXPERIENCIA",

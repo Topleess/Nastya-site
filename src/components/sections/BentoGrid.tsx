@@ -3,7 +3,7 @@ import { BarChart3, FileText, Globe2, Leaf, Sprout } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 
-const competenceIcons = [Leaf, FileText, BarChart3, Sprout];
+const competenceIcons = [Leaf, FileText, BarChart3, BarChart3, BarChart3, Sprout];
 
 const mobileTitleLines = {
   en: ['Sustainable', 'development', '— from requirements', 'to strategy'],
@@ -65,17 +65,17 @@ export const BentoGrid: React.FC = () => {
               {t.about.competenciesTitle}
             </h3>
 
-            <div className="grid grid-cols-2 gap-3 lg:gap-4">
+            <div className="flex flex-wrap gap-3 lg:gap-4">
               {t.about.competencies.map((competence, index) => {
                 const Icon = competenceIcons[index];
 
                 return (
                   <div
                     key={competence}
-                    className="flex min-h-[4rem] min-w-0 items-center justify-center gap-2.5 overflow-hidden rounded-full border border-brand-mint/55 bg-brand-mint/[0.035] px-3 py-3 text-[clamp(0.62rem,2.65vw,0.78rem)] font-semibold uppercase tracking-[0.01em] text-white transition-colors hover:bg-brand-mint/[0.08] sm:justify-start sm:gap-3 sm:px-5 sm:text-sm lg:px-6"
+                    className="flex min-h-[3.75rem] max-w-full items-center justify-start gap-2.5 rounded-full border border-brand-mint/55 bg-brand-mint/[0.035] px-4 py-3 text-[clamp(0.65rem,2.7vw,0.78rem)] font-semibold uppercase tracking-[0.01em] text-white transition-colors hover:bg-brand-mint/[0.08] sm:gap-3 sm:px-5 sm:text-sm lg:px-6"
                   >
                     <Icon className="h-5 w-5 shrink-0 text-brand-mint sm:h-6 sm:w-6" strokeWidth={1.8} />
-                    <span className="min-w-0 leading-tight [overflow-wrap:anywhere]">{competence}</span>
+                    <span className="whitespace-nowrap leading-tight">{competence}</span>
                   </div>
                 );
               })}

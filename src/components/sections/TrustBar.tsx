@@ -89,13 +89,18 @@ export const TrustBar: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="relative z-10 overflow-hidden border-y border-white/[0.06] bg-[#0d0f0f] py-14 sm:py-16 lg:py-20">
+    <section className="relative z-10 overflow-hidden bg-[#111] py-14 sm:py-16 lg:py-20">
+      <div className="pointer-events-none absolute inset-x-0 -top-64 h-[34rem]">
+        <div className="absolute -left-[18%] top-0 h-full w-[72%] rounded-full bg-brand-yellow/[0.07] blur-[140px]" />
+        <div className="absolute -right-[18%] top-0 h-full w-[72%] rounded-full bg-brand-mint/[0.09] blur-[150px]" />
+      </div>
+
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
+            'linear-gradient(rgba(0,210,160,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,210,160,.03) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
         }}
       />
 
@@ -105,16 +110,27 @@ export const TrustBar: React.FC = () => {
         </h2>
       </div>
 
-      <div
-        className="relative space-y-3 sm:space-y-4"
-        style={{
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 11%, black 89%, transparent 100%)',
-          maskImage: 'linear-gradient(to right, transparent 0%, black 11%, black 89%, transparent 100%)',
-        }}
-      >
+      <div className="relative space-y-3 sm:space-y-4">
         <LogoRow partners={partnerRows[0]} direction="left" duration={28} offsetClass="-ml-20" />
         <LogoRow partners={partnerRows[1]} direction="right" duration={32} offsetClass="-ml-8" />
         <LogoRow partners={partnerRows[2]} direction="left" duration={25} offsetClass="-ml-32" />
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 z-20 w-[30vw] min-w-28 max-w-96"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,.9) 18%, rgba(0,0,0,.62) 44%, rgba(0,0,0,.25) 72%, rgba(0,0,0,0) 100%)',
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 z-20 w-[30vw] min-w-28 max-w-96"
+          style={{
+            background:
+              'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,.9) 18%, rgba(0,0,0,.62) 44%, rgba(0,0,0,.25) 72%, rgba(0,0,0,0) 100%)',
+          }}
+        />
       </div>
     </section>
   );
