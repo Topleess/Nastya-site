@@ -1,99 +1,76 @@
 import React from 'react';
-import { Globe, Atom, Building2, GraduationCap, Users, Trophy, LayoutTemplate } from 'lucide-react';
+import { BarChart3, FileText, Globe2, Leaf, Sprout } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+
+const competenceIcons = [Leaf, FileText, BarChart3, Sprout];
 
 export const BentoGrid: React.FC = () => {
   const { t } = useLanguage();
 
-  // Unified Card Style
-  const cardBase = "bg-[#111] border border-white/10 rounded-[2rem] p-8 flex flex-col justify-between min-h-[16rem] h-full relative group hover:border-brand-mint/30 transition-all duration-300";
-  const iconBase = "w-8 h-8 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 self-end mt-4";
-
   return (
-    <section id="about" className="py-20 bg-brand-black">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <h2 className="text-3xl font-display font-bold mb-12 text-white uppercase opacity-50 tracking-widest">{t.nav.about}</h2>
+    <section id="about" className="relative overflow-hidden bg-brand-black py-16 sm:py-20 lg:py-24">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-35"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+        }}
+      />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
+      <div className="container relative mx-auto max-w-7xl px-5 lg:px-8">
+        <p className="mb-5 text-sm font-semibold uppercase tracking-[0.22em] text-gray-400 sm:mb-6 sm:text-base">
+          {t.nav.about}
+        </p>
 
-          {/* --- ROW 1 --- */}
+        <h2 className="max-w-6xl font-display text-[clamp(2rem,5.1vw,4.5rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.045em] text-white">
+          {t.about.title}
+        </h2>
 
-          {/* Card 1: Expertise (wide) */}
-          <motion.div whileHover={{ y: -5 }} className={`${cardBase} lg:col-span-2`}>
-            <div>
-              <p className="text-sm font-bold text-brand-yellow uppercase tracking-wider mb-2">{t.bento.card1_text}</p>
-              <h3 className="text-xl font-display font-bold text-white leading-tight">{t.bento.card2_title}</h3>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.18 }}
+          transition={{ duration: 0.55, ease: 'easeOut' }}
+          className="relative mt-9 overflow-hidden rounded-[2rem] border border-white/[0.14] bg-[#101212]/95 px-6 py-8 shadow-[0_24px_80px_rgba(0,0,0,.28)] sm:px-9 sm:py-10 lg:mt-10 lg:grid lg:grid-cols-[1.15fr_0.9fr] lg:gap-12 lg:px-10 lg:py-10"
+        >
+          <Globe2
+            aria-hidden="true"
+            strokeWidth={0.55}
+            className="pointer-events-none absolute -right-20 -top-14 h-64 w-64 text-brand-mint opacity-[0.13] sm:-right-12 sm:-top-20 sm:h-80 sm:w-80 lg:-right-8 lg:-top-28 lg:h-96 lg:w-96"
+          />
+
+          <div className="relative z-10 lg:pr-4">
+            <div className="mb-6 h-[3px] w-12 rounded-full bg-brand-yellow" />
+            <div className="max-w-2xl space-y-5 text-[1.03rem] leading-[1.65] text-gray-200 sm:text-xl sm:leading-[1.6] lg:text-[1.32rem]">
+              <p>{t.about.paragraph1}</p>
+              <p>{t.about.paragraph2}</p>
             </div>
-            <LayoutTemplate className={`${iconBase} text-brand-yellow`} />
-          </motion.div>
+          </div>
 
-          {/* Card 2: Scientific Basis */}
-          <motion.div whileHover={{ y: -5 }} className={cardBase}>
-            <div>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">{t.bento.card3_title}</p>
-              <h3 className="text-lg font-bold text-white leading-snug">{t.bento.card3_text}</h3>
+          <div className="relative z-10 mt-9 border-t border-white/10 pt-8 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-8">
+            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-gray-400 sm:text-sm">
+              {t.about.competenciesTitle}
+            </h3>
+
+            <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 lg:gap-4">
+              {t.about.competencies.map((competence, index) => {
+                const Icon = competenceIcons[index];
+
+                return (
+                  <div
+                    key={competence}
+                    className="flex min-h-[4rem] items-center gap-3 rounded-full border border-brand-mint/55 bg-brand-mint/[0.035] px-5 py-3 text-sm font-semibold uppercase tracking-[0.02em] text-white transition-colors hover:bg-brand-mint/[0.08] sm:px-6"
+                  >
+                    <Icon className="h-6 w-6 shrink-0 text-brand-mint" strokeWidth={1.8} />
+                    <span>{competence}</span>
+                  </div>
+                );
+              })}
             </div>
-            <Atom className={`${iconBase} text-brand-mint`} />
-          </motion.div>
-
-          {/* Card 3: Applied Practice */}
-          <motion.div whileHover={{ y: -5 }} className={cardBase}>
-            <div>
-              <h3 className="text-lg font-bold text-white leading-snug mb-2">{t.bento.card4_title}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">{t.bento.card4_desc}</p>
-            </div>
-            <Building2 className={`${iconBase} text-white`} />
-          </motion.div>
-
-          {/* Card 4: Education (Green Card) */}
-          <motion.div whileHover={{ y: -5 }} className="bg-brand-mint rounded-[2rem] p-8 flex flex-col justify-between min-h-[16rem] h-full relative group hover:shadow-[0_0_30px_rgba(0,210,160,0.3)] transition-all duration-300">
-            <div>
-              <p className="text-xs font-bold text-brand-black/60 uppercase tracking-wider mb-2">{t.bento.row2_1_title}</p>
-              <h3 className="text-xl font-bold text-brand-black leading-tight tracking-tight">
-                {t.bento.row2_1_text}
-              </h3>
-              <p className="text-sm text-brand-black/80 mt-2 font-medium">{t.bento.row2_2_sub}</p>
-            </div>
-            <GraduationCap className="w-10 h-10 text-brand-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform self-end mt-4" />
-          </motion.div>
-
-
-          {/* --- ROW 2 --- */}
-
-          {/* Card 5: International Expertise */}
-          <motion.div whileHover={{ y: -5 }} className={cardBase}>
-            <div>
-              <p className="text-sm font-bold text-brand-mint uppercase tracking-wider mb-2">{t.bento.row2_3_title}</p>
-              <p className="text-lg font-bold text-white leading-snug">{t.bento.row2_3_text}</p>
-            </div>
-            <Globe className={`${iconBase} text-brand-mint`} />
-          </motion.div>
-
-          {/* Card 6: Future Work */}
-          <motion.div whileHover={{ y: -5 }} className={cardBase}>
-            <div>
-              <span className="text-5xl font-display font-bold text-brand-yellow leading-none tracking-tighter">{t.bento.row2_2_title}</span>
-              <p className="text-sm font-bold text-white uppercase tracking-wider mt-2">{t.bento.row2_2_text}</p>
-            </div>
-            <div className="relative z-10 w-full mt-2">
-              <p className="text-xs text-gray-400">{t.bento.row2_2_sub}</p>
-            </div>
-            <Users className={`${iconBase} text-brand-yellow`} />
-          </motion.div>
-
-          {/* Card 7: Recognized Result */}
-          <motion.div whileHover={{ y: -5 }} className={cardBase}>
-            <div>
-              <p className="text-sm font-bold text-brand-mint uppercase tracking-wider mb-2">{t.bento.row2_4_title}</p>
-              <h3 className="text-lg font-bold text-white leading-snug">{t.bento.row2_4_text}</h3>
-              <p className="text-xs text-gray-400 mt-2">{t.bento.row2_4_desc}</p>
-            </div>
-            <Trophy className={`${iconBase} text-white`} />
-          </motion.div>
-
-
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

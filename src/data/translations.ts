@@ -20,7 +20,14 @@ export const translations = {
       stat_gold: "Gold Medals",
       stat_excellence: "Excellence Award",
     },
-    partners: "Trusted Partners & Collaborators",
+    partners: "Partners",
+    about: {
+      title: "Sustainable development — from requirements to strategy",
+      paragraph1: "Sustainability and carbon regulation specialist with a background in ecology at RUDN University and sustainable development economics at Moscow State University.",
+      paragraph2: "For more than three years, I have managed environmental and ESG projects, including federal projects under the auspices of Rosatom State Corporation.",
+      competenciesTitle: "Core expertise",
+      competencies: ["Carbon markets", "CBAM", "CSRD · TCFD · GRI", "Decarbonisation"],
+    },
     bento: {
       card1_text: "EXPERTISE",
       card2_top: "CREATING",
@@ -123,7 +130,14 @@ export const translations = {
       stat_gold: "Золотые медали",
       stat_excellence: "За отличную учебу",
     },
-    partners: "Партнеры и Сотрудничество",
+    partners: "Партнёры",
+    about: {
+      title: "Устойчивое развитие — от требований к стратегии",
+      paragraph1: "Специалист по устойчивому развитию и углеродному регулированию с образованием в области экологии — РУДН — и экономики устойчивого развития — МГУ.",
+      paragraph2: "Более трёх лет управляю экологическими и ESG-проектами, включая работу над федеральными проектами под эгидой Госкорпорации «Росатом».",
+      competenciesTitle: "Ключевые компетенции",
+      competencies: ["Углеродные рынки", "CBAM", "CSRD · TCFD · GRI", "Декарбонизация"],
+    },
     bento: {
       card1_text: "ЭКСПЕРТИЗА",
       card2_top: "СОЗДАНИЕ",
@@ -226,7 +240,14 @@ export const translations = {
       stat_gold: "Medallas de Oro",
       stat_excellence: "Premio de Excelencia",
     },
-    partners: "Socios y Colaboradores",
+    partners: "Socios",
+    about: {
+      title: "Desarrollo sostenible: de los requisitos a la estrategia",
+      paragraph1: "Especialista en desarrollo sostenible y regulación del carbono, con formación en ecología en la Universidad RUDN y economía del desarrollo sostenible en la Universidad Estatal de Moscú.",
+      paragraph2: "Durante más de tres años he dirigido proyectos ambientales y ESG, incluidos proyectos federales bajo los auspicios de la Corporación Estatal Rosatom.",
+      competenciesTitle: "Competencias clave",
+      competencies: ["Mercados de carbono", "CBAM", "CSRD · TCFD · GRI", "Descarbonización"],
+    },
     bento: {
       card1_text: "EXPERIENCIA",
       card2_top: "CREACIÓN",
