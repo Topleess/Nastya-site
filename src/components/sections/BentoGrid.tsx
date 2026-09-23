@@ -15,16 +15,7 @@ export const BentoGrid: React.FC = () => {
   const { t, language } = useLanguage();
 
   return (
-    <section id="about" className="relative overflow-hidden bg-brand-black py-16 sm:py-20 lg:py-24">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-35"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
-        }}
-      />
-
+    <section id="about" className="relative z-10 overflow-hidden py-16 sm:py-20 lg:py-24">
       <div className="container relative mx-auto max-w-7xl px-5 lg:px-8">
         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.22em] text-gray-400 sm:mb-6 sm:text-base">
           {t.nav.about}

@@ -8,17 +8,7 @@ export const Hero: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-12 overflow-hidden bg-[#111]">
-      {/* Reference Background Style: Tech Grid & Glows */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,210,160,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,210,160,0.03)_1px,transparent_1px)] bg-[size:60px_60px] opacity-40" />
-
-        {/* Large Soft Blobs - ENHANCED */}
-        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-brand-mint/20 rounded-full blur-[150px] mix-blend-screen animate-pulse-slow" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-brand-yellow/10 rounded-full blur-[120px]" />
-      </div>
-
+    <section id="home" className="relative z-10 min-h-[90vh] flex items-center justify-center pt-28 pb-12 overflow-hidden">
       <div className="container mx-auto px-4 z-10 flex items-center justify-center">
 
         {/* Text Content */}
