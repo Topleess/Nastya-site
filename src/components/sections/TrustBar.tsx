@@ -26,7 +26,7 @@ const partnerRows: Partner[][] = [
   [
     { src: '/images/partners/Z6ssy_xSoI8XWmBE4L331A1SZ0MwffSqrhVeIBYdhTrV5Ew964tQT6DAjli73zv.webp', alt: 'Экологическая инициатива' },
     { src: '/images/partners/__-.webp', alt: 'Экосистема', darken: true },
-    { src: '/images/partners/logo.webp', alt: 'Я в деле', darken: true },
+    { src: '/images/partners/ya-v-dele-dark.webp', alt: 'Я в деле' },
     { src: '/images/partners/logocr@2x.webp', alt: 'Центр развития', darken: true },
     { src: '/images/partners/2026-04-16_11-49-54.webp', alt: 'Collectors club' },
   ],
@@ -56,10 +56,13 @@ const LogoRow: React.FC<{
   const reduceMotion = useReducedMotion();
   const viewportRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number | null>(null);
+  const positionRef = useRef(0);
   const pausedUntilRef = useRef(0);
   const draggingRef = useRef(false);
   const dragStartXRef = useRef(0);
+  const dragStartYRef = useRef(0);
   const dragStartScrollRef = useRef(0);
+  const touchHorizontalRef = useRef(false);
 
   const pauseAutoScroll = (delay = 2400) => {
     pausedUntilRef.current = performance.now() + delay;
@@ -73,26 +76,35 @@ const LogoRow: React.FC<{
 
     const groupWidth = track.scrollWidth / 3;
     viewport.scrollLeft = groupWidth;
+    positionRef.current = groupWidth;
 
     let previousTime = performance.now();
 
     const animate = (currentTime: number) => {
-      const elapsedSeconds = Math.min((currentTime - previousTime) / 1000, 0.05);
+      // iOS can deliver RAF at a lower/variable rate while the page is scrolling.
+      // Keep a fractional logical position and allow wider frame gaps so the
+      // marquee speed stays constant instead of becoming almost imperceptible.
+      const elapsedSeconds = Math.min((currentTime - previousTime) / 1000, 0.25);
       previousTime = currentTime;
 
       const currentGroupWidth = track.scrollWidth / 3;
 
       if (currentGroupWidth > 0) {
-        if (viewport.scrollLeft < currentGroupWidth * 0.25) {
-          viewport.scrollLeft += currentGroupWidth;
-        } else if (viewport.scrollLeft > currentGroupWidth * 1.75) {
-          viewport.scrollLeft -= currentGroupWidth;
+        if (currentTime < pausedUntilRef.current) {
+          // Native touch scrolling owns the viewport while paused.
+          positionRef.current = viewport.scrollLeft;
+        } else if (!reduceMotion) {
+          const distance = (currentGroupWidth / duration) * elapsedSeconds;
+          positionRef.current += direction === 'left' ? distance : -distance;
         }
 
-        if (!reduceMotion && currentTime >= pausedUntilRef.current) {
-          const distance = (currentGroupWidth / duration) * elapsedSeconds;
-          viewport.scrollLeft += direction === 'left' ? distance : -distance;
+        if (positionRef.current < currentGroupWidth * 0.25) {
+          positionRef.current += currentGroupWidth;
+        } else if (positionRef.current > currentGroupWidth * 1.75) {
+          positionRef.current -= currentGroupWidth;
         }
+
+        viewport.scrollLeft = positionRef.current;
       }
 
       animationFrameRef.current = requestAnimationFrame(animate);
@@ -108,17 +120,33 @@ const LogoRow: React.FC<{
   }, [direction, duration, reduceMotion]);
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    pauseAutoScroll();
+    dragStartXRef.current = event.clientX;
+    dragStartYRef.current = event.clientY;
+    touchHorizontalRef.current = false;
 
-    if (event.pointerType !== 'touch') {
+    if (event.pointerType === 'touch') {
+      return;
+    } else {
+      pauseAutoScroll();
       draggingRef.current = true;
-      dragStartXRef.current = event.clientX;
       dragStartScrollRef.current = event.currentTarget.scrollLeft;
       event.currentTarget.setPointerCapture(event.pointerId);
     }
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'touch') {
+      const deltaX = Math.abs(event.clientX - dragStartXRef.current);
+      const deltaY = Math.abs(event.clientY - dragStartYRef.current);
+
+      if (deltaX > 8 && deltaX > deltaY) {
+        touchHorizontalRef.current = true;
+        pauseAutoScroll();
+      }
+
+      return;
+    }
+
     if (!draggingRef.current) return;
 
     event.preventDefault();
@@ -128,6 +156,12 @@ const LogoRow: React.FC<{
   };
 
   const handlePointerEnd = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'touch') {
+      if (touchHorizontalRef.current) pauseAutoScroll();
+      touchHorizontalRef.current = false;
+      return;
+    }
+
     draggingRef.current = false;
     pauseAutoScroll();
 
@@ -146,9 +180,7 @@ const LogoRow: React.FC<{
       onPointerCancel={handlePointerEnd}
       onWheel={() => pauseAutoScroll()}
     >
-      <div
-        className="flex w-max will-change-transform"
-      >
+      <div className="flex w-max">
         {[0, 1, 2].map((group) => (
           <div key={group} className="flex gap-3 pr-3 sm:gap-4 sm:pr-4" aria-hidden={group !== 1}>
             {partners.map((partner) => (
