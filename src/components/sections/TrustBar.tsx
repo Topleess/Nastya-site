@@ -1,12 +1,11 @@
-import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import React, { useLayoutEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 
 type Partner = {
   src: string;
   alt: string;
   darken?: boolean;
-  darkCard?: boolean;
 };
 
 const partnerRows: Partner[][] = [
@@ -18,7 +17,7 @@ const partnerRows: Partner[][] = [
     { src: '/images/partners/logo-2.webp', alt: 'Росконгресс' },
   ],
   [
-    { src: '/images/partners/png_transparent_peoples_friendship_university_of_russia_bauman_moscow.webp', alt: 'РУДН' },
+    { src: '/images/partners/rudn-clean.webp', alt: 'РУДН' },
     { src: '/images/partners/ranepa-logo.webp', alt: 'Президентская академия' },
     { src: '/images/partners/YWhweqR06gLT3Nnmlkb7Gln3etdiWYq_Ey1yBW_M493u37cmyGt0ij_h3pocb5O.webp', alt: 'Pro mentor' },
     { src: '/images/partners/wsgs00Rd1KK0S1yv1rfvX44e7E_QA9wOvkCqX2b0JLsbJ_rOHJ3UJWV6Jot2buy.webp', alt: 'Наставник' },
@@ -27,27 +26,22 @@ const partnerRows: Partner[][] = [
   [
     { src: '/images/partners/Z6ssy_xSoI8XWmBE4L331A1SZ0MwffSqrhVeIBYdhTrV5Ew964tQT6DAjli73zv.webp', alt: 'Экологическая инициатива' },
     { src: '/images/partners/__-.webp', alt: 'Экосистема', darken: true },
-    { src: '/images/partners/logo.webp', alt: 'Я в деле', darkCard: true },
+    { src: '/images/partners/logo.webp', alt: 'Я в деле' },
     { src: '/images/partners/logocr@2x.webp', alt: 'Центр развития', darken: true },
     { src: '/images/partners/2026-04-16_11-49-54.webp', alt: 'Collectors club' },
   ],
 ];
 
-const LogoCard: React.FC<{ partner: Partner; index: number }> = ({ partner, index }) => (
+const LogoCard: React.FC<{ partner: Partner }> = ({ partner }) => (
   <div
-    className={`flex h-[5.75rem] w-56 shrink-0 items-center justify-center rounded-[1.4rem] border px-7 py-5 shadow-[0_8px_30px_rgba(0,0,0,0.16)] sm:h-28 sm:w-72 lg:h-32 lg:w-80 lg:px-9 ${
-      partner.darkCard
-        ? 'border-white/10 bg-[#202020]'
-        : index % 3 === 2
-          ? 'border-black/5 bg-[#e9fff8]'
-          : 'border-black/5 bg-[#f4f3ef]'
-    }`}
+    className="flex h-[5.75rem] w-56 shrink-0 items-center justify-center rounded-[1.4rem] border border-black/5 bg-[#f4f3ef] px-7 py-5 shadow-[0_8px_30px_rgba(0,0,0,0.16)] sm:h-28 sm:w-72 lg:h-32 lg:w-80 lg:px-9"
   >
     <img
       src={partner.src}
       alt={partner.alt}
       loading="lazy"
       decoding="async"
+      draggable={false}
       className={`h-full w-full object-contain ${partner.darken ? 'brightness-0' : ''}`}
     />
   </div>
@@ -60,27 +54,109 @@ const LogoRow: React.FC<{
   offsetClass?: string;
 }> = ({ partners, direction, duration, offsetClass = '' }) => {
   const reduceMotion = useReducedMotion();
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const pausedUntilRef = useRef(0);
+  const draggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartScrollRef = useRef(0);
+
+  const pauseAutoScroll = (delay = 2400) => {
+    pausedUntilRef.current = performance.now() + delay;
+  };
+
+  useLayoutEffect(() => {
+    const viewport = viewportRef.current;
+    const track = viewport?.firstElementChild as HTMLElement | null;
+
+    if (!viewport || !track) return;
+
+    const groupWidth = track.scrollWidth / 3;
+    viewport.scrollLeft = groupWidth;
+
+    let previousTime = performance.now();
+
+    const animate = (currentTime: number) => {
+      const elapsedSeconds = Math.min((currentTime - previousTime) / 1000, 0.05);
+      previousTime = currentTime;
+
+      const currentGroupWidth = track.scrollWidth / 3;
+
+      if (currentGroupWidth > 0) {
+        if (viewport.scrollLeft < currentGroupWidth * 0.25) {
+          viewport.scrollLeft += currentGroupWidth;
+        } else if (viewport.scrollLeft > currentGroupWidth * 1.75) {
+          viewport.scrollLeft -= currentGroupWidth;
+        }
+
+        if (!reduceMotion && currentTime >= pausedUntilRef.current) {
+          const distance = (currentGroupWidth / duration) * elapsedSeconds;
+          viewport.scrollLeft += direction === 'left' ? distance : -distance;
+        }
+      }
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [direction, duration, reduceMotion]);
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    pauseAutoScroll();
+
+    if (event.pointerType !== 'touch') {
+      draggingRef.current = true;
+      dragStartXRef.current = event.clientX;
+      dragStartScrollRef.current = event.currentTarget.scrollLeft;
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!draggingRef.current) return;
+
+    event.preventDefault();
+    event.currentTarget.scrollLeft =
+      dragStartScrollRef.current - (event.clientX - dragStartXRef.current);
+    pauseAutoScroll();
+  };
+
+  const handlePointerEnd = (event: React.PointerEvent<HTMLDivElement>) => {
+    draggingRef.current = false;
+    pauseAutoScroll();
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
 
   return (
-    <div className={`relative overflow-hidden ${offsetClass}`}>
-      <motion.div
+    <div
+      ref={viewportRef}
+      className={`relative cursor-grab select-none overflow-x-auto overscroll-x-contain active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${offsetClass}`}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerEnd}
+      onPointerCancel={handlePointerEnd}
+      onWheel={() => pauseAutoScroll()}
+    >
+      <div
         className="flex w-max will-change-transform"
-        initial={{ x: direction === 'left' ? '0%' : '-50%' }}
-        animate={
-          reduceMotion
-            ? undefined
-            : { x: direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%'] }
-        }
-        transition={{ duration, ease: 'linear', repeat: Infinity }}
       >
-        {[0, 1].map((group) => (
-          <div key={group} className="flex gap-3 pr-3 sm:gap-4 sm:pr-4" aria-hidden={group === 1}>
-            {partners.map((partner, index) => (
-              <LogoCard key={`${partner.src}-${group}`} partner={partner} index={index + group} />
+        {[0, 1, 2].map((group) => (
+          <div key={group} className="flex gap-3 pr-3 sm:gap-4 sm:pr-4" aria-hidden={group !== 1}>
+            {partners.map((partner) => (
+              <LogoCard key={`${partner.src}-${group}`} partner={partner} />
             ))}
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };
