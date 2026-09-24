@@ -26,7 +26,7 @@ const partnerRows: Partner[][] = [
   [
     { src: '/images/partners/Z6ssy_xSoI8XWmBE4L331A1SZ0MwffSqrhVeIBYdhTrV5Ew964tQT6DAjli73zv.webp', alt: 'Экологическая инициатива' },
     { src: '/images/partners/__-.webp', alt: 'Экосистема', darken: true },
-    { src: '/images/partners/logo.webp', alt: 'Я в деле' },
+    { src: '/images/partners/logo.webp', alt: 'Я в деле', darken: true },
     { src: '/images/partners/logocr@2x.webp', alt: 'Центр развития', darken: true },
     { src: '/images/partners/2026-04-16_11-49-54.webp', alt: 'Collectors club' },
   ],
